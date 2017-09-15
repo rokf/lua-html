@@ -20,10 +20,11 @@ end
 local M = {}
 
 setmetatable(M, {
-  __call = function (_, f,cfenv)
+  __call = function (_, f,data,cfenv)
     local fenv
     if cfenv then
       fenv = cfenv
+      fenv.data = data or {}
     else
       fenv = {
         print = print,
@@ -39,7 +40,8 @@ setmetatable(M, {
         next = next,
         table = table,
         math = math,
-        string = string
+        string = string,
+        data = data or {}
       }
     end
     setfenv(f,fenv)
