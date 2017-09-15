@@ -9,8 +9,9 @@ function calls with HTML strings.
 The metatable of the module itself has a `__call` field.
 After the module is required it can be called as a function.
 
-The function accepts two arguments. A function and an optional
-custom environment table. The function runs inside a custom
+The function accepts three arguments. A function,
+a data table (optional) and a custom environment table (optional).
+The function runs inside a custom
 environment so you can still get those `undefined` errors
 outside of it.
 
