@@ -1,3 +1,21 @@
+local empty = {
+  ['area'] = true,
+  ['base'] = true,
+  ['br'] = true,
+  ['col'] = true,
+  ['embed'] = true,
+  ['hr'] = true,
+  ['img'] = true,
+  ['input'] = true,
+  ['keygen'] = true,
+  ['link'] = true,
+  ['meta'] = true,
+  ['param'] = true,
+  ['source'] = true,
+  ['track'] = true,
+  ['wbr'] = true
+}
+
 local function make_html_elem(el,t)
   local output = {}
   local attributes = {}
@@ -10,10 +28,10 @@ local function make_html_elem(el,t)
   local space = " "
   if attribute_string == "" then space = "" end
   table.insert(output, '<' .. el .. space .. attribute_string .. '>')
-  for _,v in ipairs(t) do
-    table.insert(output, tostring(v))
+  if not empty[el] then
+    for _,v in ipairs(t) do table.insert(output, tostring(v)) end
+    table.insert(output, '</' .. el .. '>')
   end
-  table.insert(output, '</' .. el .. '>')
   return table.concat(output)
 end
 
